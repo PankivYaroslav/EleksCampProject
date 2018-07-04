@@ -1,10 +1,6 @@
-﻿using GamesPortal.DAL.Context;
-using GamesPortal.DAL.Entities;
-using GamesPortal.DAL.Repositories;
-using GamesPortal.DAL.Repositories.Interfaces;
+﻿using GamesPortal.Api.Resources.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,9 +19,8 @@ namespace GamesPortal.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<ApplicationContext>(options =>
-                options.UseInMemoryDatabase("qwe"));
-            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddSingleton(Mapper.Instance);
+            ServiceLocator.RegisterDependencies(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
