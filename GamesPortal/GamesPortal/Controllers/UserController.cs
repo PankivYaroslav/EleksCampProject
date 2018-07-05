@@ -20,29 +20,39 @@ namespace GamesPortal.Api.Controllers
             _businessLogic = businessLogic;
         }
 
-        public override Task<IActionResult> GetAll()
+        [HttpGet]
+        public override async Task<IActionResult> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var dtoList = await _businessLogic.GetAll();
+            return Ok(dtoList);
         }
 
-        public override Task<IActionResult> Get(int id)
+        [HttpGet("{id}")]
+        public override async Task<IActionResult> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Get(id);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Create(UserDto dto)
+        [HttpPost]
+        public override async Task<IActionResult> CreateAsync([FromBody]UserDto dto)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Create(dto);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Update(UserDto dto)
+        [HttpPut]
+        public override async Task<IActionResult> UpdateAsync([FromBody]UserDto dto)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Update(dto);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Delete(int id)
+        [HttpDelete]
+        public override async Task<IActionResult> DeleteAsync([FromBody]UserDto dto)
         {
-            throw new NotImplementedException();
+            await _businessLogic.Delete(dto);
+            return Ok();
         }
     }
 }

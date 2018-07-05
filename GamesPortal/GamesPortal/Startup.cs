@@ -1,8 +1,12 @@
-﻿using GamesPortal.Api.Resources.Utilities;
+﻿using System.Reflection;
+using AutoMapper;
+using GamesPortal.Api.Resources.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NJsonSchema;
+using NSwag.AspNetCore;
 
 namespace GamesPortal.Api
 {
@@ -19,8 +23,8 @@ namespace GamesPortal.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton(Mapper.Instance);
             ServiceLocator.RegisterDependencies(services);
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +34,12 @@ namespace GamesPortal.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+            {
+                settings.GeneratorSettings.DefaultPropertyNameHandling =
+                    PropertyNameHandling.CamelCase;
+            });
 
             app.UseMvc();
         }

@@ -11,6 +11,6 @@ namespace GamesPortal.DAL.Entities
         public string PassWord { get; set; }
         public string Email { get; set; }
 
-        public List<Score> Scores { get; set; }
+        public ICollection<Score> Scores { get; set; }
     }
 }

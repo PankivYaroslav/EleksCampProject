@@ -7,6 +7,6 @@ namespace GamesPortal.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Score> Scores { get; set; }
+        public ICollection<Score> Scores { get; set; }
     }
 }

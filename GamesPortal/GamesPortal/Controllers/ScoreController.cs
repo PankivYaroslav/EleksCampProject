@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GamesPortal.BL.DTOs;
 using GamesPortal.BL.Services.Interfaces;
+using GamesPortal.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,29 +21,39 @@ namespace GamesPortal.Api.Controllers
             _businessLogic = businessLogic;
         }
 
-        public override Task<IActionResult> GetAll()
+        [HttpGet]
+        public override async Task<IActionResult> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var dtoList = await _businessLogic.GetAll();
+            return Ok(dtoList);
         }
 
-        public override Task<IActionResult> Get(int id)
+        [HttpGet("{id}")]
+        public override async Task<IActionResult> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Get(id);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Create(ScoreDto dto)
+        [HttpPost]
+        public override async Task<IActionResult> CreateAsync([FromBody]ScoreDto dto)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Create(dto);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Update(ScoreDto dto)
+        [HttpPut]
+        public override async Task<IActionResult> UpdateAsync([FromBody]ScoreDto dto)
         {
-            throw new NotImplementedException();
+            var record = await _businessLogic.Update(dto);
+            return Ok(record);
         }
 
-        public override Task<IActionResult> Delete(int id)
+        [HttpDelete]
+        public override async Task<IActionResult> DeleteAsync([FromBody]ScoreDto dto)
         {
-            throw new NotImplementedException();
+            await _businessLogic.Delete(dto);
+            return Ok();
         }
     }
 }

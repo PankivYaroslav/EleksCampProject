@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using GamesPortal.BL.DTOs;
 using GamesPortal.BL.Services.Interfaces;
 using GamesPortal.DAL.Entities;
@@ -9,40 +10,49 @@ namespace GamesPortal.BL.Services
 {
     public class GameService : IBusinessLogic<GameDto>
     {
-        private readonly IRepository<GameDto> _repository;
+        private readonly IRepository<Game> _repository;
+        private readonly IMapper _mapper;
 
-        public GameService(IRepository<GameDto> repository)
+        public GameService(IRepository<Game> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<GameDto>> GetAll()
         {
             var result = await _repository.GetAll();
-            return result;
+            var dtos = _mapper.Map<IEnumerable<GameDto>>(result);
+            return dtos;
         }
 
         public async Task<GameDto> Get(int id)
         {
             var result = await _repository.Get(id);
-            return result;
+            var dto = _mapper.Map<GameDto>(result);
+            return dto;
         }
 
         public async Task<GameDto> Create(GameDto entity)
         {
-            var result = await _repository.Create(entity);
-            return result;
+            var map = _mapper.Map<Game>(entity);
+            var result = await _repository.Create(map);
+            var dto = _mapper.Map<GameDto>(result);
+            return dto;
         }
 
         public async Task<GameDto> Update(GameDto entity)
         {
-            var result = await _repository.Update(entity);
-            return result;
+            var map = _mapper.Map<Game>(entity);
+            var result = await _repository.Update(map);
+            var dto = _mapper.Map<GameDto>(result);
+            return dto;
         }
 
         public async Task Delete(GameDto entity)
         {
-            await _repository.Delete(entity);
+            var map = _mapper.Map<Game>(entity);
+            await _repository.Delete(map);
         }
     }
 }
