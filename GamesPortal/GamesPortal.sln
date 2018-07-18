@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.Api", "GamesPortal\GamesPortal.Api.csproj", "{81A59110-8DDD-4342-805C-7A71908F4CA2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.DAL", "GamesPortal.DAL\GamesPortal.DAL.csproj", "{6971CB43-4EB2-4F78-8F92-B9FAD6A8146C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesPortal.BL", "GamesPortal.BL\GamesPortal.BL.csproj", "{CE89704A-1B05-48A5-9703-28413EFA915D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.BL", "GamesPortal.BL\GamesPortal.BL.csproj", "{CE89704A-1B05-48A5-9703-28413EFA915D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.Api", "GamesPortal.Api\GamesPortal.Api.csproj", "{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81A59110-8DDD-4342-805C-7A71908F4CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81A59110-8DDD-4342-805C-7A71908F4CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81A59110-8DDD-4342-805C-7A71908F4CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81A59110-8DDD-4342-805C-7A71908F4CA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6971CB43-4EB2-4F78-8F92-B9FAD6A8146C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6971CB43-4EB2-4F78-8F92-B9FAD6A8146C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6971CB43-4EB2-4F78-8F92-B9FAD6A8146C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{CE89704A-1B05-48A5-9703-28413EFA915D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE89704A-1B05-48A5-9703-28413EFA915D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE89704A-1B05-48A5-9703-28413EFA915D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
