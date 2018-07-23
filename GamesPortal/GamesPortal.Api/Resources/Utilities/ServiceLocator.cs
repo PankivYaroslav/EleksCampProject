@@ -5,8 +5,10 @@ using GamesPortal.DAL.Context;
 using GamesPortal.DAL.Entities;
 using GamesPortal.DAL.Repositories;
 using GamesPortal.DAL.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GamesPortal.Api.Resources.Utilities
 {
@@ -15,13 +17,16 @@ namespace GamesPortal.Api.Resources.Utilities
         public static void RegisterDependencies(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseInMemoryDatabase("db"));
+                options.UseSqlServer("GamesPortalDBConnection"));
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Game>, GameRepository>();
             services.AddScoped<IRepository<Score>, ScoreRepository>();
             services.AddScoped<IBusinessLogic<UserDto>, UserService>();
             services.AddScoped<IBusinessLogic<GameDto>, GameService>();
             services.AddScoped<IBusinessLogic<ScoreDto>, ScoreService>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders();
         }
     }
 }
