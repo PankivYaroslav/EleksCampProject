@@ -7,6 +7,7 @@ using GamesPortal.DAL.Repositories;
 using GamesPortal.DAL.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -14,10 +15,10 @@ namespace GamesPortal.Api.Resources.Utilities
 {
     public static class ServiceLocator
     {
-        public static void RegisterDependencies(IServiceCollection services)
+        public static void RegisterDependencies(IServiceCollection services, IConfiguration Configuration)
         {
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer("GamesPortalDBConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("GamesPortalDBConnection"), b => b.MigrationsAssembly("GamesPortal.Api")));
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Game>, GameRepository>();
             services.AddScoped<IRepository<Score>, ScoreRepository>();

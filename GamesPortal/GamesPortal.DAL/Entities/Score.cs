@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 		public int GameId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public long Amount { get; set; }
 
         public Game Game { get; set; }

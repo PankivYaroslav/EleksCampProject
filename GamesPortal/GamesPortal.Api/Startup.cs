@@ -23,7 +23,7 @@ namespace GamesPortal.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            ServiceLocator.RegisterDependencies(services);
+            ServiceLocator.RegisterDependencies(services, Configuration);
             services.AddAutoMapper();
         }
 
