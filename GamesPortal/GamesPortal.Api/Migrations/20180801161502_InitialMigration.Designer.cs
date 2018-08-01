@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesPortal.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180729201045_InitialMigration")]
+    [Migration("20180801161502_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,13 +84,15 @@ namespace GamesPortal.Api.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PassWord");
+                    b.Property<string>("Password");
 
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<bool>("RememberMe");
 
                     b.Property<string>("SecurityStamp");
 

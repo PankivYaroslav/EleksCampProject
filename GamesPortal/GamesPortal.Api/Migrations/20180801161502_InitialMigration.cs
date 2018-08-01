@@ -43,7 +43,8 @@ namespace GamesPortal.Api.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    PassWord = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    RememberMe = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

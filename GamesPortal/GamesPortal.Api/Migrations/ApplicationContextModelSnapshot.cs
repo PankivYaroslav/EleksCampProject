@@ -82,13 +82,15 @@ namespace GamesPortal.Api.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PassWord");
+                    b.Property<string>("Password");
 
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<bool>("RememberMe");
 
                     b.Property<string>("SecurityStamp");
 
