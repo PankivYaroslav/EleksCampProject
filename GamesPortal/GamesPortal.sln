@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.BL", "GamesPort
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesPortal.Api", "GamesPortal.Api\GamesPortal.Api.csproj", "{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesPortal.Client", "GamesPortal.Client\GamesPortal.Client.csproj", "{D947AB73-62A7-45F8-A92F-054A3F5B19AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD8EBDC-A9E9-487A-A1D8-99B9320434BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D947AB73-62A7-45F8-A92F-054A3F5B19AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D947AB73-62A7-45F8-A92F-054A3F5B19AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D947AB73-62A7-45F8-A92F-054A3F5B19AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D947AB73-62A7-45F8-A92F-054A3F5B19AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
