@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesPortal.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [EnableCors("MyPolicy")]
     public abstract class BaseController<T> : Controller
     {

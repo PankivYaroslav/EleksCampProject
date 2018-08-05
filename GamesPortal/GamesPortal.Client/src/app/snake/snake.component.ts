@@ -1,6 +1,9 @@
 ﻿import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BestScoreManager } from './app.storage.service';
 import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES } from './app.constants';
+import { User } from '../_models';
+
 @Component({
     selector: 'snake',
     styleUrls: ['./app.component.css'],
@@ -11,10 +14,12 @@ import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES } from './app.constants';
 })
 
 export class SnakeComponent { 
-    private interval: number;
+  private interval: number;
+  private gameId: number = 1;
   private tempDirection: number;
   private default_mode = 'classic';
   private isGameOver = false;
+  currentUser: User;
 
   public all_modes = GAME_MODES;
   public getKeys = Object.keys;
@@ -42,8 +47,10 @@ export class SnakeComponent {
   };
 
   constructor(
-    private bestScoreService: BestScoreManager
+    private bestScoreService: BestScoreManager,
+    private http: HttpClient
   ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.setBoard();
   }
 
@@ -212,6 +219,13 @@ export class SnakeComponent {
     this.isGameOver = true;
     this.gameStarted = false;
     let me = this;
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.currentUser.token);
+    
+    this.http.post(`${config.apiUrl}/score`, { 
+      userId: this.currentUser.id, gameId: this.gameId, amount: this.score }, { headers: headers });
 
     if (this.score > this.best_score) {
       this.bestScoreService.store(this.score);
