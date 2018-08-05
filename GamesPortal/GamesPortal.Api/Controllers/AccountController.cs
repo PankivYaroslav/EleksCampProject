@@ -9,6 +9,7 @@ using AutoMapper;
 using GamesPortal.BL.DTOs;
 using GamesPortal.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GamesPortal.Api.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Produces("application/json")]
     public class AccountController : Controller
     {
@@ -45,7 +47,7 @@ namespace GamesPortal.Api.Controllers
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return await GenerateJwtToken(model.Email, appUser);
+                return Ok(await GenerateJwtToken(model.Email, appUser));
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
@@ -61,7 +63,7 @@ namespace GamesPortal.Api.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return await GenerateJwtToken(model.Email, user);
+                return Ok(await GenerateJwtToken(model.Email, user));
             }
 
             throw new ApplicationException("UNKNOWN_ERROR");
