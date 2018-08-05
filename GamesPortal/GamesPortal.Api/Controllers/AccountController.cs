@@ -42,12 +42,20 @@ namespace GamesPortal.Api.Controllers
         [Route("api/Login")]
         public async Task<object> Login([FromBody] UserDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
             if (result.Succeeded)
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return Ok(await GenerateJwtToken(model.Email, appUser));
+                var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.UserName);
+                var token = await GenerateJwtToken(model.UserName, appUser);
+                return Ok(new
+                {
+                    appUser.Id,
+                    appUser.UserName,
+                    appUser.FirstName,
+                    appUser.LastName,
+                    Token = token
+                });
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
@@ -63,17 +71,17 @@ namespace GamesPortal.Api.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return Ok(await GenerateJwtToken(model.Email, user));
+                return Ok(await GenerateJwtToken(model.UserName, user));
             }
 
             throw new ApplicationException("UNKNOWN_ERROR");
         }
 
-        private async Task<object> GenerateJwtToken(string email, IdentityUser user)
+        private async Task<object> GenerateJwtToken(string UserName, IdentityUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Sub, UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
