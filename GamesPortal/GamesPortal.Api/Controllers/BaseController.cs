@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesPortal.Api.Controllers
 {
-    //[Authorize]
-    [EnableCors("MyPolicy")]
+    [Authorize]
     public abstract class BaseController<T> : Controller
     {
         public abstract Task<IActionResult> GetAllAsync();

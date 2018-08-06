@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BestScoreManager } from './app.storage.service';
 import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES } from './app.constants';
 import { User } from '../_models';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'snake',
@@ -221,11 +222,15 @@ export class SnakeComponent {
     let me = this;
 
     let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + this.currentUser.token);
-    
-    this.http.post(`${config.apiUrl}/score`, { 
-      userId: this.currentUser.id, gameId: this.gameId, amount: this.score }, { headers: headers });
+    var form = new FormData();
+    form.append("userId", this.currentUser.id.toString());
+    form.append("gameId", this.gameId.toString());
+    form.append("amount", this.score.toString());
+    this.http.post<any>(`${config.apiUrl}/score`, form, { headers: headers }).pipe(
+      map((res: Response) => res.json())).subscribe(res => {
+        console.log(res);
+      });
 
     if (this.score > this.best_score) {
       this.bestScoreService.store(this.score);

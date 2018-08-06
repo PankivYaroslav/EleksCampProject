@@ -36,7 +36,7 @@ namespace GamesPortal.Api.Controllers
         }
 
         [HttpPost]
-        public override async Task<IActionResult> CreateAsync([FromBody]ScoreDto dto)
+        public override async Task<IActionResult> CreateAsync(ScoreDto dto)
         {
             var record = await _businessLogic.Create(dto);
             return Ok(record);
