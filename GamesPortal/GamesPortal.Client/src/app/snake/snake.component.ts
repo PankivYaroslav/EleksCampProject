@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BestScoreManager } from './app.storage.service';
-import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES } from './app.constants';
+import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES, OBSTACLE1, OBSTACLE2, OBSTACLE3 } from './app.constants';
 import { User } from '../_models';
 import { map } from 'rxjs/operators';
 
@@ -87,9 +87,7 @@ export class SnakeComponent {
     let newHead = this.repositionHead();
     let me = this;
 
-    if (this.default_mode === 'classic' && this.boardCollision(newHead)) {
-      return this.gameOver();
-    } else if (this.default_mode === 'no_walls') {
+    if (this.default_mode === 'classic') {
       this.noWallsTransition(newHead);
     } else if (this.default_mode === 'obstacles') {
       this.noWallsTransition(newHead);
@@ -148,17 +146,9 @@ export class SnakeComponent {
   }
 
   addObstacles(): void {
-    let x = this.randomNumber();
-    let y = this.randomNumber();
-
-    if (this.board[y][x] === true || y === 8) {
-      return this.addObstacles();
-    }
-
-    this.obstacles.push({
-      x: x,
-      y: y
-    });
+    let i = this.randomNumber();
+    let obs = [OBSTACLE1, OBSTACLE2, OBSTACLE3];
+    this.obstacles = obs[i];
   }
 
   checkObstacles(x, y): boolean {
@@ -246,7 +236,7 @@ export class SnakeComponent {
   }
 
   randomNumber(): any {
-    return Math.floor(Math.random() * BOARD_SIZE);
+    return Math.floor(Math.random() * 3);
   }
 
   setBoard(): void {
@@ -283,11 +273,7 @@ export class SnakeComponent {
     }
 
     if (mode === 'obstacles') {
-      this.obstacles = [];
-      let j = 1;
-      do {
-        this.addObstacles();
-      } while (j++ < 9);
+      this.addObstacles();
     }
 
     this.resetFruit();
