@@ -15,13 +15,17 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { BestScoreManager } from './snake/app.storage.service';
 import { SnakeComponent } from './snake';
+import { MyNavBarComponent } from './mynavbar'
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ScoresComponent } from './scores'
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing
+        routing,
+        CollapseModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -29,7 +33,9 @@ import { SnakeComponent } from './snake';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        SnakeComponent
+        SnakeComponent,
+        MyNavBarComponent,
+        ScoresComponent
     ],
     providers: [
         AuthGuard,

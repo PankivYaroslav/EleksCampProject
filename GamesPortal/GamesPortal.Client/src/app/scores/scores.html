@@ -1,0 +1,15 @@
+﻿<mynavbar></mynavbar>
+<table class="table" style="align-content: center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Game</th>
+        <th scope="col">Score</th>
+      </tr>
+      <tr *ngFor='let score of scores; let i= index'>
+        <td>{{i + 1}}</td>
+        <td>Snake</td>
+        <td>{{score.amount}}</td>
+      </tr>
+    </thead>
+</table>
